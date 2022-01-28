@@ -15,10 +15,6 @@
 */
 -->
 <resources>
-    <!-- Radius of the software rounded corners at the bottom of the display in its natural
-        orientation. If zero, the value of rounded_corner_radius is used. -->
-    <dimen name="rounded_corner_content_padding">8dp</dimen>
-
      <!-- the padding on the start of the statusbar -->
     <dimen name="status_bar_padding_start">16dp</dimen>
 
