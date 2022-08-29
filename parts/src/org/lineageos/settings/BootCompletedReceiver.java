@@ -28,7 +28,6 @@ import android.util.Log;
 import androidx.preference.PreferenceManager;
 
 import org.lineageos.settings.dirac.DiracUtils;
-import org.lineageos.settings.doze.DozeUtils;
 import org.lineageos.settings.utils.FileUtils;
 import org.lineageos.settings.thermal.ThermalUtils;
 
@@ -45,7 +44,6 @@ public class BootCompletedReceiver extends BroadcastReceiver {
 
         PendingResult pendingResult = goAsync();
         DiracUtils.initialize(context);
-        DozeUtils.onBootCompleted(context);
         ThermalUtils.startService(context);
 
 	pendingResult.finish();
