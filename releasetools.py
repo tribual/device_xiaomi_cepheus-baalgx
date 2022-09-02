@@ -53,14 +53,6 @@ def IncrementalOTA_GetBlockDifferences(info):
   return [BlockDifference(partition, target_image, source_images.get(partition))
           for partition, target_image in target_images.items()]
 
-def FullOTA_InstallBegin(info):
-  input_zip = info.input_zip
-  AddImage(info, "RADIO", input_zip, "super_dummy.img", "/tmp/super_dummy.img");
-  info.script.AppendExtra('package_extract_file("install/bin/flash_super_dummy.sh", "/tmp/flash_super_dummy.sh");')
-  info.script.AppendExtra('set_metadata("/tmp/flash_super_dummy.sh", "uid", 0, "gid", 0, "mode", 0755);')
-  info.script.AppendExtra('run_program("/tmp/flash_super_dummy.sh");')
-  return
-
 def FullOTA_InstallEnd(info):
   input_zip = info.input_zip
   OTA_UpdateFirmware(info)
@@ -105,8 +97,8 @@ def OTA_UpdateFirmware(info):
   info.script.AppendExtra('package_extract_file("install/firmware-update/xbl_config.elf", "/dev/block/bootdevice/by-name/xbl_config");')
   info.script.AppendExtra('package_extract_file("install/firmware-update/xbl_config.elf", "/dev/block/bootdevice/by-name/xbl_configbak");')
 
-def AddImage(info, dir, input_zip, basename, dest):
-  path = dir + "/" + basename
+def AddImage(info, input_zip, basename, dest):
+  path = "IMAGES/" + basename
   if path not in input_zip.namelist():
     return
 
@@ -117,6 +109,6 @@ def AddImage(info, dir, input_zip, basename, dest):
 
 def OTA_InstallEnd(info, input_zip):
   info.script.Print("Patching dtbo and vbmeta images...")
-  AddImage(info, "IMAGES", input_zip, "dtbo.img", "/dev/block/bootdevice/by-name/dtbo")
-  AddImage(info, "IMAGES", input_zip, "vbmeta.img", "/dev/block/bootdevice/by-name/vbmeta")
+  AddImage(info, input_zip, "dtbo.img", "/dev/block/bootdevice/by-name/dtbo")
+  AddImage(info, input_zip, "vbmeta.img", "/dev/block/bootdevice/by-name/vbmeta")
   return
