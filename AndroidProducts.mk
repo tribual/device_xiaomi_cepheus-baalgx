@@ -15,9 +15,9 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/evolution_cepheus.mk
+    $(LOCAL_DIR)/spark_cepheus.mk
 
 COMMON_LUNCH_CHOICES := \
-    evolution_cepheus-user \
-    evolution_cepheus-userdebug \
-    evolution_cepheus-eng
+    spark_cepheus-user \
+    spark_cepheus-userdebug \
+    spark_cepheus-eng
